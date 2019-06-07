@@ -5,6 +5,7 @@ import java.util.Set;
 public class Owner extends Person
 {
     private Set<Pet> pets;
+    private Address address;
 
     public Set<Pet> getPets() {
         return pets;
@@ -12,5 +13,15 @@ public class Owner extends Person
 
     public void setPets(Set<Pet> pets) {
         this.pets = pets;
+    }
+
+    public Address getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(Address address)
+    {
+        this.address = address;
     }
 }
