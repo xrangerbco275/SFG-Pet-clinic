@@ -1,13 +1,13 @@
 package guru.springframework.sfgpetclinic.bootstrap;
 
-import guru.springframework.sfgpetclinic.model.Owner;
-import guru.springframework.sfgpetclinic.model.PetType;
-import guru.springframework.sfgpetclinic.model.Vet;
+import guru.springframework.sfgpetclinic.model.*;
 import guru.springframework.sfgpetclinic.services.OwnerService;
 import guru.springframework.sfgpetclinic.services.PetTypeService;
 import guru.springframework.sfgpetclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class DataLoader implements CommandLineRunner
@@ -36,13 +36,42 @@ public class DataLoader implements CommandLineRunner
         PetType savedCatPetTYpe = petTypeService.save(cat);
 
         Owner owner1 = new Owner();
-        owner1.setFirstName("Joe");
-        owner1.setLastName("Cruz");
+        owner1.setFirstName("Mike");
+        owner1.setLastName("Smith");
+        Address address = new Address();
+        address.setAddress("12345 State St");
+        address.setCity("St Louis");
+        address.setState("MO");
+        address.setZip("63104");
+        address.setTelephone("3144207996");
+        owner1.setAddress(address);
+
+        Pet mikesPet = new Pet();
+        mikesPet.setPetType(savedDogPetTYpe);
+        mikesPet.setOwner(owner1);
+        mikesPet.setBirthDate(LocalDate.now());
+        mikesPet.setName("Bear");
+        owner1.getPets().add(mikesPet);
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Bob");
         owner2.setLastName("Denver");
+        address = new Address();
+        address.setAddress("7654 Main  St");
+        address.setCity("St Louis");
+        address.setState("MO");
+        address.setZip("63323");
+        address.setTelephone("3145556789");
+        owner2.setAddress(address);
+
+        Pet bobsPet = new Pet();
+        bobsPet.setPetType(savedCatPetTYpe);
+        bobsPet.setOwner(owner2);
+        bobsPet.setBirthDate(LocalDate.now());
+        bobsPet.setName("Mia");
+        owner1.getPets().add(bobsPet);
+
         ownerService.save(owner2);
 
         System.out.println("Loaded Owners ...");
